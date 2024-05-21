@@ -1,10 +1,30 @@
 import csv
 import re
+import os
+
+directories = os.listdir()
+list_dirs = []
+for director in directories:
+    if '.csv' in director:
+        list_dirs += [director]
+
+num=0
+for list_dir in list_dirs:
+    num+=1
+    print(f'[{num}] {list_dir}')
+
+enter_list = int(input('Введите число: '))
+enter_list-=1
+try:
+    document = (list_dirs[enter_list])
+    print(document)
+except:
+    print('Некорректный выбор')
 
 with open('exceptions.txt', 'r') as file_txt:
     txt_domains = {row.strip() for row in file_txt}
 
-with open('test.csv', 'r') as file_csv:
+with open(f'{document}', 'r') as file_csv:
     reader = csv.DictReader(file_csv)
     
     if 'Domain' not in reader.fieldnames:
